@@ -11,10 +11,11 @@ int main (const int argc, const char * argv[])
   const char* filename = cimg_option("-i","image.jpg","Input image file");
   const int height = cimg_option("-h",0,"desired height of the output image");
   const int width = cimg_option("-w",0,"desired width of the output image");
-  const double scale = cimg_option("-s",0,"scale down the image with desired modifier");
+  const double scale = cimg_option("-s",0.5,"scale down the image with desired modifier");
   const char* newfile = cimg_option("-o","image_new.jpg","output image file");
   //creating cimg object
   CImg<unsigned char> img(filename);
+  
   //scaledown options
   if(scale)
     {
@@ -23,6 +24,7 @@ int main (const int argc, const char * argv[])
       img.resize(width_s, height_s);
       img.save(newfile);
     }
+  
   //given width and height
   else if(width &  height)
     {
