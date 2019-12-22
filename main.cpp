@@ -22,14 +22,14 @@ int main (const int argc, const char * argv[])
   //scaledown options
   if(scale)
     {
-      img.resize(width_s, height_s);
+      img.resize(width_s, height_s, 1, 3, 1);
       img.save(newfile);
     }
   
   //given width and height
   if(width &  height)
     {
-      img.resize(width, height);
+      img.resize(width, height, 1, 3, 1);
       img.save(newfile);
     }
   else if(width)
