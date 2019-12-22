@@ -22,25 +22,36 @@ int main (const int argc, const char * argv[])
   //scaledown options
   if(scale)
     {
-      img.resize(width_s, height_s, 1, 3, 1);
+      img.resize(width_s, height_s, 1, 3, 3);
       img.save(newfile);
     }
   
   //given width and height
   if(width &  height)
     {
-      img.resize(width, height, 1, 3, 1);
-      img.save(newfile);
+      if(width<img.width() && height<img.height())
+	{
+	  img.resize(width, height, 1, 3, 3);
+	  img.save(newfile);
+	}
+      else if(width>=img.width() || height>=img.height())
+	{
+	  img.resize(width, height, 1, 3, );
+	  img.save(newfile);
+	}
     }
+  
   else if(width)
     {
-      img.resize(width, img.height());
+      img.resize(width, img.height(), 1, 3, 3);
       img.save(newfile);
     }
+  
   else if(height)
     {
-      img.resize(img.width(),height);
+      img.resize(img.width(),height, 1, 3, 3);
       img.save(newfile);
     }
+  
   return 0;
 }
