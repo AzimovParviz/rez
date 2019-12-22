@@ -14,4 +14,5 @@ $ clang++ -I .. -I /usr/local/X11/include main.cpp -L /opt/X11/lib -lX11 -o rez
 $ g++ -o rez main.cpp -O2 -L/usr/X11R6/lib -lm -lpthread -lX11
 ## Example usage
 $ ./rez -i test.png -h 480 -w 640 -o testnew.png
+
 $ ./rez -i test.jpg -s 0.3 -o testnew.jpg
