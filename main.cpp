@@ -1,5 +1,6 @@
 #include "CImg.h"
 #include <iostream>
+#define cimg_use_png
 
 using namespace std;
 using namespace cimg_library;
@@ -26,7 +27,7 @@ int main (const int argc, const char * argv[])
       switch(color)
       {
       case 0:
-	img.resize(width_s, height_s, 1, 3, 3);
+	img.resize(width_s, height_s, 1, img.spectrum(), 3);
 	img.save(newfile);
 	break;
       case 1://black and white
@@ -34,7 +35,7 @@ int main (const int argc, const char * argv[])
 	img.save(newfile);
 	break;
       default://default is keep color settings
-	img.resize(width_s, height_s, 1, 3, 3);
+	img.resize(width_s, height_s, 1, img.spectrum(), 3);
 	img.save(newfile);
 	break;
       }
@@ -48,12 +49,12 @@ int main (const int argc, const char * argv[])
       case 0:
 	if(width<img.width() && height<img.height())
 	  {
-	    img.resize(width, height, 1, 3, 3);
+	    img.resize(width, height, 1, img.spectrum(), 3);
 	    img.save(newfile);
 	  }	
 	else if(width>=img.width() || height>=img.height())
 	  {
-	    img.resize(width, height, 1, 3, 6);
+	    img.resize(width, height, 1, img.spectrum(), 6);
 	    img.save(newfile);
 	  }
 	break;
@@ -74,12 +75,12 @@ int main (const int argc, const char * argv[])
       default:
 	if(width<img.width() && height<img.height())
 	  {
-	    img.resize(width, height, 1, 3, 3);
+	    img.resize(width, height, 1, img.spectrum(), 3);
 	    img.save(newfile);
 	  }	
 	else if(width>=img.width() || height>=img.height())
 	{
-	  img.resize(width, height, 1, 3, 6);
+	  img.resize(width, height, 1, img.spectrum(), 6);
 	  img.save(newfile);
 	}
       }
@@ -93,12 +94,12 @@ int main (const int argc, const char * argv[])
       case 0:
 	if(width<img.width())
 	  {
-	    img.resize(width, img.height(), 1, 3, 3);
+	    img.resize(width, img.height(), 1, img.spectrum(), 3);
 	    img.save(newfile);
 	  }
 	else if(width>img.width())
 	  {
-	    img.resize(width, img.height(), 1, 3, 6);
+	    img.resize(width, img.height(), 1, img.spectrum(), 6);
 	  img.save(newfile);
 	  }
 	break;
@@ -117,12 +118,12 @@ int main (const int argc, const char * argv[])
       default:
 	if(width<img.width())
 	  {
-	    img.resize(width, img.height(), 1, 3, 3);
+	    img.resize(width, img.height(), 1, img.spectrum(), 3);
 	    img.save(newfile);
 	  }
 	else if(width>img.width())
 	  {
-	    img.resize(width, img.height(), 1, 3, 6);
+	    img.resize(width, img.height(), 1, img.spectrum(), 6);
 	    img.save(newfile);
 	  }
 	break;
@@ -136,36 +137,36 @@ int main (const int argc, const char * argv[])
       case 0:
 	if(height<img.height())
 	  {
-	    img.resize(img.width(),height, 1, 3, 3);
+	    img.resize(img.width(),height, 1, img.spectrum(), 3);
 	    img.save(newfile);
 	  }
 	else if(height>=img.height())
 	  {
-	    img.resize(img.width(),height,1, 3, 6);
+	    img.resize(img.width(),height,1, img.spectrum(), 6);
 	    img.save(newfile);
 	  }
 	break;
       case 1://b&w
 	if(height<img.height())
 	  {
-	    img.resize(img.width(),height, 1, 3, 3);
+	    img.resize(img.width(),height, 1, 1, 3);
 	    img.save(newfile);
 	  }
 	else if(height>=img.height())
 	  {
-	    img.resize(img.width(),height,1, 3, 6);
+	    img.resize(img.width(),height,1, 1, 6);
 	    img.save(newfile);
 	  }
 	break;
       default://normal colour
 	if(height<img.height())
 	  {
-	    img.resize(img.width(),height, 1, 3, 3);
+	    img.resize(img.width(),height, 1, img.spectrum(), 3);
 	    img.save(newfile);
 	  }
 	else if(height>=img.height())
 	  {
-	    img.resize(img.width(),height,1, 3, 6);
+	    img.resize(img.width(),height,1, img.spectrum(), 6);
 	    img.save(newfile);
 	  }
 	break;
