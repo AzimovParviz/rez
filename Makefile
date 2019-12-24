@@ -6,5 +6,5 @@ rez: main.cpp CImg.h
 endif
 ifeq ($(UNAME), Darwin)
 rez: main.cpp CImg.h
-	clang++ -I .. -I /usr/local/X11/include main.cpp -Dcimg_use_png -L /opt/X11/lib -lX11 -lpng -o rez
+	clang++ -I .. -I /usr/local/X11/include main.cpp -L /opt/X11/lib -lX11 -lpng -ljpeg -o rez
 endif
