@@ -1,6 +1,8 @@
 #include "CImg.h"
 #include <iostream>
 #define cimg_use_png
+#define cimg_use_jpeg
+#define cimg_use_magick
 
 using namespace std;
 using namespace cimg_library;
@@ -17,7 +19,7 @@ int main (const int argc, const char * argv[])
   const char* newfile = cimg_option("-o","image_new.jpg","output image file");
   //creating cimg object
   CImg<unsigned char> img(filename);
-  
+
   int width_s = img.width()*scale;
   int height_s = img.height()*scale;
   

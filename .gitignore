@@ -1,9 +1,10 @@
 #extra files
-main.cpp~
+img/
 #*
 .DS_Store
 *~
 *.jpg
+*.jpeg
 *.gif
 *.png
 *.bmp
