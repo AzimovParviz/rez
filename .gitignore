@@ -1,6 +1,6 @@
 #extra files
 img/
-#*
+*\#
 .DS_Store
 *~
 *.jpg
