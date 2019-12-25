@@ -12,166 +12,22 @@ int main (const int argc, const char * argv[])
   //options
   cimg_usage("Retrieve command line arguments");
   const char* filename = cimg_option("-i","image.jpg","Input image file");
-  const int height = cimg_option("-h",0,"desired height of the output image");
-  const int width = cimg_option("-w",0,"desired width of the output image");
-  const double scale = cimg_option("-s",0.0,"scale the image with desired modifier");
-  const int color = cimg_option("-c", 0,"choose color scheme, 0 - unchanged, 1 - black and white");
+  CImg<unsigned char> img(filename);
+  const int height = cimg_option("-h",img.height(),"desired height of the output image");
+  const int width = cimg_option("-w",img.width(),"desired width of the output image");
+  const double scale = cimg_option("-s",1.0,"scale the image with desired modifier");
+  const int rotate = cimg_option("-r",0,"rotate the image INT degrees");
+  const int color = cimg_option("-c", img.spectrum(),"choose color scheme, default - unchanged, 1 - black and white, 3 - RGB, 4 - RGBA");
   const char* newfile = cimg_option("-o","image_new.jpg","output image file");
   //creating cimg object
-  CImg<unsigned char> img(filename);
-
-  int width_s = img.width()*scale;
-  int height_s = img.height()*scale;
-  
-  //scaling options
-  if(scale)
-    {
-      switch(color)
-      {
-      case 0:
-	img.resize(width_s, height_s, 1, img.spectrum(), 3);
-	img.save(newfile);
-	break;
-      case 1://black and white
-	img.resize(width_s, height_s, 1, 1, 3);
-	img.save(newfile);
-	break;
-      default://default is keep color settings
-	img.resize(width_s, height_s, 1, img.spectrum(), 3);
-	img.save(newfile);
-	break;
-      }
-    }
-  
-  //given width and height
-  if(width & height)
-    {
-      switch(color)
-	{	
-	case 0:
-	  if(width<img.width() && height<img.height())
-	    {
-	      img.resize(width, height, 1, img.spectrum(), 3);
-	      img.save(newfile);
-	    }	
-	else if(width>=img.width() || height>=img.height())
-	  {
-	    img.resize(width, height, 1, img.spectrum(), 6);
-	    img.save(newfile);
-	  }
-	break;	
-	case 1://b&w
-	  if(width<img.width() && height<img.height())
-	    {
-	      img.resize(width, height, 1, 1, 3);
-	      img.save(newfile);
-	    }	
-	else if(width>=img.width() || height>=img.height())
-	  {
-	    img.resize(width, height, 1, 1, 6);
-	    img.save(newfile);
-	  }      
-	  break;      	
-      default:
-	if(width<img.width() && height<img.height())
-	  {
-	    img.resize(width, height, 1, img.spectrum(), 3);
-	    img.save(newfile);
-	  }	
-	else if(width>=img.width() || height>=img.height())
-	  {
-	    img.resize(width, height, 1, img.spectrum(), 6);
-	    img.save(newfile);
-	  }
-	}
-    } 
-  
-  
-  //if only width is provided
-  else if(width)
-    {
-      switch(color){
-      case 0:
-	if(width<img.width())
-	  {
-	    img.resize(width, img.height(), 1, img.spectrum(), 3);
-	    img.save(newfile);
-	  }
-	else if(width>img.width())
-	  {
-	    img.resize(width, img.height(), 1, img.spectrum(), 6);
-	    img.save(newfile);
-	  }
-	break;
-      case 1://black&white
-	if(width<img.width())
-	  {
-	    img.resize(width, img.height(), 1, 1, 3);
-	    img.save(newfile);
-	  }
-	else if(width>img.width())
-	  {
-	    img.resize(width, img.height(), 1, 1, 6);
-	    img.save(newfile);
-	  }
-	break;
-      default:
-	if(width<img.width())
-	  {
-	    img.resize(width, img.height(), 1, img.spectrum(), 3);
-	    img.save(newfile);
-	  }
-	else if(width>img.width())
-	  {
-	    img.resize(width, img.height(), 1, img.spectrum(), 6);
-	    img.save(newfile);
-	  }
-	break;
-      }
-    }
-  
-  //if only height is provided
-  else if(height)
-    {
-      switch(color){
-      case 0:
-	if(height<img.height())
-	  {
-	    img.resize(img.width(),height, 1, img.spectrum(), 3);
-	    img.save(newfile);
-	  }
-	else if(height>=img.height())
-	  {
-	    img.resize(img.width(),height,1, img.spectrum(), 6);
-	    img.save(newfile);
-	  }
-	break;
-      case 1://b&w
-	if(height<img.height())
-	  {
-	    img.resize(img.width(),height, 1, 1, 3);
-	    img.save(newfile);
-	  }
-	else if(height>=img.height())
-	  {
-	    img.resize(img.width(),height,1, 1, 6);
-	    img.save(newfile);
-	  }
-	break;
-      default://normal colour
-	if(height<img.height())
-	  {
-	    img.resize(img.width(),height, 1, img.spectrum(), 3);
-	    img.save(newfile);
-	  }
-	else if(height>=img.height())
-	  {
-	    img.resize(img.width(),height,1, img.spectrum(), 6);
-	    img.save(newfile);
-	  }
-	break;
-      }
-    }
-      
+  cout<<height<<" "<<width<<"h and w of the image kek"<<endl;
+  if(rotate)
+    img.rotate(rotate, 2);
+  /* setting up interpolation type based on whenever the image is upscaled or downscaled*/
+  if(height<img.height() || width<img.width() || scale<1.0)
+    img.resize(height*scale,width*scale, 1, color, 6);
+  else
+    img.resize(height*scale,width*scale, 1, color, 3);
+  img.save(newfile);
   return 0;
 }
