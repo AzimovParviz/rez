@@ -1,4 +1,4 @@
-# rez - lightweight image resizing CLI tool
+# rez - simple image resizing CLI tool
 Single header program written only using C++
 
 ## Dependencies
