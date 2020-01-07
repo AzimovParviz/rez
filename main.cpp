@@ -25,9 +25,9 @@ int main (const int argc, const char * argv[])
     img.rotate(rotate, 2);
   /* setting up interpolation type based on whenever the image is upscaled or downscaled*/
   if(height<img.height() || width<img.width() || scale<1.0)
-    img.resize(height*scale,width*scale, 1, color, 6);
+    img.resize(width*scale,height*scale, 1, color, 6);
   else
-    img.resize(height*scale,width*scale, 1, color, 3);
+    img.resize(width*scale,height*scale, 1, color, 3);
   img.save(newfile);
   return 0;
 }
