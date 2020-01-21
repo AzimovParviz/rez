@@ -1,8 +1,7 @@
+#define cimg_use_png 1
+#define cimg_use_jpeg 1
 #include "CImg.h"
 #include <iostream>
-#define cimg_use_png
-#define cimg_use_jpeg
-#define cimg_use_magick
 
 using namespace std;
 using namespace cimg_library;
