@@ -1,8 +1,7 @@
+#define cimg_use_png 1
+#define cimg_use_jpeg 1
 #include "CImg.h"
 #include <iostream>
-#define cimg_use_png
-#define cimg_use_jpeg
-#define cimg_use_magick
 
 using namespace std;
 using namespace cimg_library;
@@ -24,9 +23,9 @@ int main (const int argc, const char * argv[])
     img.rotate(rotate, 2);
   /* setting up interpolation type (6 - cubic, 3 - linear) based on whenever the image is upscaled or downscaled*/
   if(height<img.height() || width<img.width() || scale<1.0)
-    img.resize(width*scale,height*scale, 1, color, 6);
+    img.resize(height*scale,width*scale, 1, color, 6);//using cubic interpolation if upscaling
   else
-    img.resize(width*scale,height*scale, 1, color, 3);
+    img.resize(height*scale,width*scale, 1, color, 3);//using linear if downscaling
   img.save(newfile);
   return 0;
 }
