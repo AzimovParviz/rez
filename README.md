@@ -3,7 +3,9 @@ Single header program written only using C++
 
 ## Dependencies
 libpng-dev and libjpeg-dev
+
 libx11-dev if you get X11lib.h error
+
 xQuartz for any MacOS newer than Mountain Lion
 
 ImageMagick on machines running *nix
