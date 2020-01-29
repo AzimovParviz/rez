@@ -18,7 +18,7 @@ int main (const int argc, const char * argv[])
   const int rotate = cimg_option("-r",0,"rotate the image INT degrees");
   const int color = cimg_option("-c", img.spectrum(),"choose color scheme, default - unchanged, 1 - black and white, 3 - RGB, 4 - RGBA");
   const char* newfile = cimg_option("-o","image_new.jpg","output image file");
-  cout<<width<<" "<<height<<" width and height of the image"<<endl;
+  cout<<width<<" "<<height<<" width and height of the input image and "<<color<<" is the channel number"<<endl;
   if(rotate)
     img.rotate(rotate, 2);
   /* setting up interpolation type (6 - cubic, 3 - linear) based on whenever the image is upscaled or downscaled*/
@@ -26,6 +26,7 @@ int main (const int argc, const char * argv[])
     img.resize(height*scale,width*scale, 1, color, 6);//using cubic interpolation if upscaling
   else
     img.resize(height*scale,width*scale, 1, color, 3);//using linear if downscaling
+  cout<<img.width()<<" "<<img.height()<<" width and height of the output image and "<<img.spectrum()<<" is the channel number"<<endl;
   img.save(newfile);
   return 0;
 }
