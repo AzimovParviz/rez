@@ -10,8 +10,9 @@ xQuartz for any MacOS newer than Mountain Lion
 
 ImageMagick on machines running *nix
 
-Only works on Linux with xorg
+On Linux, it only works with xorg installed
 
+I have absolutely no idea how to make this work on Windows, maybe when I install it one day I'll try but you are free to attempt to
 ## Compilation
 Please edit Makefile accordingly if you did not install xQuartz on Mac through homebrew
 
